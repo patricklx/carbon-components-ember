@@ -1,8 +1,7 @@
 import Component from '@ember/component';
-import { bxClassNames, classPrefix } from 'carbon-components-ember/decorators/bx-class-names';
+import { bxClassNames, classPrefix, argsCompat } from 'carbon-components-ember/decorators/bx-class-names';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
 import { styleNamespace } from './styles';
 /** @documenter yuidoc */
 
@@ -21,6 +20,8 @@ import { styleNamespace } from './styles';
 class CarbonButton extends Component {
   tagName = '';
   styleNamespace = styleNamespace;
+
+  @argsCompat
   args = {
     /**
      * Will display a spinning Wheel inside the button
@@ -77,20 +78,6 @@ class CarbonButton extends Component {
 
   @service('carbon-components-ember@dialog-manager') dialogManager;
   @bxClassNames('primary', 'secondary', 'danger', 'tertiary', 'ghost', 'small:sm') bxClassNames;
-
-  constructor(...args) {
-    super(...args);
-    if (this.args) {
-      Object.keys(this.args).forEach((k) => {
-        const obj = this;
-        Object.defineProperty(this.args, k, {
-          get() {
-            return obj[k];
-          }
-        })
-      });
-    }
-  }
 
   @action
   onButtonClick(...args) {

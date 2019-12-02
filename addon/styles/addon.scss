@@ -147,3 +147,17 @@ $ember-power-select-multiple-option-line-height: 1.45 !default;
 .ember-power-select-search-input {
   @extend .bx--text-input;
 }
+
+.ember-basic-dropdown-trigger {
+  width: 25px;
+  outline: none;
+  float: right;
+}
+
+.bx--overflow-menu-options {
+  top: 0;
+}
+
+.ember-power-select-search > input {
+  padding: 0.5rem 1.5rem 0.5rem 1rem !important;
+}

@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import { tracked } from '@glimmer/tracking';
 import { set, action } from '@ember/object';
 import { isBlank } from '@ember/utils';
 

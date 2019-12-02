@@ -1,5 +1,5 @@
 {{import Icon from '../icon'}}
-<div data-search role="search" class="bx--search bx--search--{{if @small 'sm' 'xl'}} {{this.styleNamespace}} {{if @light 'bx--search--light'}}" ...attributes>
+<div data-search role="search" class="bx--search bx--search--{{if @small 'sm' (if @xl 'xl')}}  {{this.styleNamespace}} {{if @light 'bx--search--light'}}" ...attributes>
   {{#if this.hasInput}}
       <button class="bx--search-close" title="Clear search input" aria-label="Clear search input" {{on 'click' this.onSearchClear}}>
           <Icon @icon="close" class="bx--search-clear" />

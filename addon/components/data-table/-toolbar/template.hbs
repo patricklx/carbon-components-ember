@@ -1,21 +1,7 @@
+{{import set from 'carbon-components-ember/helpers/set'}}
+{{import Actions from './-actions'}}
+{{import Content from './-content'}}
+
 <section class="bx--table-toolbar ">
-   {{#if @selectedItems.length}}
-     <div class="bx--batch-actions" aria-label="Table Action Bar">
-       <div class="bx--action-list">
-        {{yield 'actions' (hash
-                close=(fn (set this.showActions false))
-                selectedItems=@selectedItems)
-        }}
-       </div>
-       <div class="bx--batch-summary">
-         <p class="bx--batch-summary__para">
-           <span data-items-selected>{{@selectedItems.length}}</span> items selected
-         </p>
-       </div>
-     </div>
-   {{else}}
-     <div class="bx--toolbar-content">
-       {{yield 'content'}}
-     </div>
-   {{/if}}
+  {{yield (hash Content=Content Actions=(component Actions table=@table))}}
 </section>

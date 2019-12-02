@@ -1,0 +1,19 @@
+{{import set from 'carbon-components-ember/helpers/set'}}
+{{import Button from 'carbon-components-ember/components/button'}}
+
+{{#if @table.selectedItems.length}}
+  <div class="bx--batch-actions bx--batch-actions--active" aria-label="Table Action Bar">
+    <div class="bx--action-list">
+    {{yield (hash
+            close=(fn (set @table 'selectedItems' (array)))
+            selectedItems=@table.selectedItems)
+    }}
+    <Button @primary=true @onClick={{fn (set @table 'selectedItems' (array))}}>Cancel</Button>
+    </div>
+    <div class="bx--batch-summary">
+      <p class="bx--batch-summary__para">
+        <span data-items-selected>{{@table.selectedItems.length}}</span> items selected
+      </p>
+    </div>
+  </div>
+{{/if}}

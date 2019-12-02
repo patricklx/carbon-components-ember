@@ -3,7 +3,16 @@ import Component from '@ember/component';
 import { action } from '@ember/object';
 import { throttle } from '@ember/runloop';
 
-class CarbonBarChart extends Component {
+/**
+ The CarbonLineChart
+
+ @class CarbonLineChart
+ @public
+ @yield {Object} api
+ @yield {Component} api.DataSet <a href='-components/dataset' >Dataset</a>
+ @yield {Component} api.Axis <a href='-components/axis' >ChartAxis</a>
+ **/
+class CarbonLineChart extends Component {
   tagName = '';
   data = {
     labels: [],
@@ -74,4 +83,4 @@ class CarbonBarChart extends Component {
   }
 }
 
-export default CarbonBarChart;
+export default CarbonLineChart;

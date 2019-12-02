@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import {argsCompat} from "../../decorators/bx-class-names";
 
 /** @documenter yuidoc */
 
@@ -15,6 +16,8 @@ import Component from '@ember/component';
  **/
 class CarbonBreadcrumb extends Component {
   tagName = '';
+
+  @argsCompat
   args = {
     /**
      @argument crumbs
@@ -24,7 +27,7 @@ class CarbonBreadcrumb extends Component {
   };
 
   get lastItem() {
-    return this.attrs.crumbs && this.attrs.crumbs[this.attrs.crumbs.length - 1];
+    return this.args.crumbs && this.args.crumbs[this.args.crumbs.length - 1];
   }
 }
 

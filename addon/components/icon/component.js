@@ -3,13 +3,13 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import * as icons from '@carbon/icons';
-import { bxClassNames, classPrefix } from 'carbon/src/decorators/bx-class-names';
+import { bxClassNames, classPrefix } from 'carbon-components-ember/decorators/bx-class-names';
 
 @classPrefix('bx--icon--')
 class CarbonIcon extends Component {
   tagName = '';
   static positionalParams = ['icon'];
-  @service('carbon@dialog-manager') dialogManager;
+  @service('carbon-components-ember@dialog-manager') dialogManager;
   @bxClassNames('info', 'danger', 'disabled') bxClassNames;
   @tracked attrs;
   @tracked loading;

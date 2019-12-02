@@ -1,17 +1,19 @@
-{{import Button from 'carbon-components-ember/component/button'}}
+{{import Button from 'carbon-components-ember/components/button'}}
+{{import Checkbox from 'carbon-components-ember/components/checkbox'}}
 {{import includes from '@abcum/ember-helpers/helpers/includes'}}
+{{import set from 'carbon-components-ember/helpers/set'}}
 
 <tr>
   {{#if @isExpandable}}
     <td class="bx--table-expand" data-event="expand">
-      <Button class="bx--table-expand__button" @onClick={{fn (set this.isExpanded (not this.isExpanded))}}>
+      <Button class="bx--table-expand__button" @onClick={{fn (set this 'isExpanded' (not this.isExpanded))}}>
         <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-expand__svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"></path></svg>
       </Button>
     </td>
   {{/if}}
   {{#if @isCheckable}}
     <td class="bx--table-column-checkbox">
-      <Checkbox @value={{includes @item @selectedItems}} @onChange={{fn @selectItem @item}} />
+      <Checkbox @checked={{includes @item @table.selectedItems}} @onChange={{fn @table.toggleItemSelection @item}} />
     </td>
   {{/if}}
   {{yield}}

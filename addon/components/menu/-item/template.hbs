@@ -5,7 +5,9 @@
             data-floating-menu-primary-focus={{@isPrimary}}
             ...attributes
     >
-      {{@title}}
-      {{yield}}
+      <span class="bx--overflow-menu-options__option-content">
+        {{@title}}
+        {{yield}}
+      </span>
     </button>
 </li>

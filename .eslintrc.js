@@ -6,8 +6,7 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended', // or 'plugin:ember/base'
-    'airbnb-base'
+    'plugin:ember/recommended'
   ],
   parser: "babel-eslint",
   "parserOptions": {
@@ -16,7 +15,6 @@ module.exports = {
     "codeFrame": true
   },
   rules: {
-    "import/extensions": "off",
     "comma-dangle": ["error", "never"],
     "max-len": ["error", { code: 120 }],
     "lines-between-class-members": "off",

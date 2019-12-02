@@ -1,9 +1,16 @@
-{{import Button from 'carbon-components-ember/component/button'}}
-{{import Checkbox from 'carbon-components-ember/component/checkbox'}}
-{{import Icon from 'carbon-components-ember/component/icon'}}
+{{import Button from 'carbon-components-ember/components/button'}}
+{{import Checkbox from 'carbon-components-ember/components/checkbox'}}
+{{import Icon from 'carbon-components-ember/components/icon'}}
 {{import set from 'carbon-components-ember/helpers/set'}}
 
-<thead {{did-update @headers (fn (set @table.headers) @headers)}}>
+<thead 
+  {{did-update @headers (fn (set @table 'headers') @headers)}}
+  {{did-update @isExpandable (fn (set @table 'isExpandable') @isExpandable)}}
+  {{did-update @isCheckable (fn (set @table 'isCheckable') @isCheckable)}}
+  {{did-insert (fn (set @table 'headers') @headers)}}
+  {{did-insert (fn (set @table 'isExpandable') @isExpandable)}}
+  {{did-insert (fn (set @table 'isCheckable') @isCheckable)}}
+  >
   <tr>
     {{#if @isExpandable}}
       <th class="bx--table-expand">
@@ -14,19 +21,21 @@
     {{/if}}
     {{#if @isCheckable}}
       <th  class="bx--table-column-checkbox">
-        <Checkbox @checked={{@allChecked}} @onChange={{fn @toggleSelectAllItems}} />
+        <Checkbox @checked={{@table.allChecked}} @onChange={{fn @table.toggleSelectAllItems}} />
       </th>
     {{/if}}
     {{#each @headers as |h|}}
-      {{#if h.sortable}}
-        <Button class="bx--table-sort" title={{h.label}}>
+      <th>
+        {{#if h.sortable}}
+          <Button class="bx--table-sort" title={{h.label}}>
+            <span class="bx--table-header-label">{{h.label}}</span>
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.3 9.3L8.5 13.1 8.5 1 7.5 1 7.5 13.1 3.7 9.3 3 10 8 15 13 10z"></path></svg>
+            <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon-unsorted" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.8 10.3L12 12.1 12 2 11 2 11 12.1 9.2 10.3 8.5 11 11.5 14 14.5 11zM4.5 2L1.5 5 2.2 5.7 4 3.9 4 14 5 14 5 3.9 6.8 5.7 7.5 5z"></path></svg>
+          </Button>
+        {{else}}
           <span class="bx--table-header-label">{{h.label}}</span>
-          <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M12.3 9.3L8.5 13.1 8.5 1 7.5 1 7.5 13.1 3.7 9.3 3 10 8 15 13 10z"></path></svg>
-          <svg focusable="false" preserveAspectRatio="xMidYMid meet" style="will-change: transform;" xmlns="http://www.w3.org/2000/svg" class="bx--table-sort__icon-unsorted" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13.8 10.3L12 12.1 12 2 11 2 11 12.1 9.2 10.3 8.5 11 11.5 14 14.5 11zM4.5 2L1.5 5 2.2 5.7 4 3.9 4 14 5 14 5 3.9 6.8 5.7 7.5 5z"></path></svg>
-        </Button>
-      {{else}}
-        <span class="bx--table-header-label">{{h.label}}</span>
-      {{/if}}
+        {{/if}}
+      </th>
     {{/each}}
   </tr>
 </thead>

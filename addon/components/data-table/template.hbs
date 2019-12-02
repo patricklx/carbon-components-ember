@@ -4,8 +4,10 @@
 {{import ListBody from './-body'}}
 {{import Skeleton from './-skeleton'}}
 {{import Toolbar from './-toolbar'}}
+{{import Table from './-table'}}
 {{import Pagination from '../pagination'}}
-{{import SearchInput from '../search-input'}}
+{{import SearchInput from './-search-input'}}
+{{import Menu from './-menu'}}
 
 {{#if @isLoading}}
   <Skeleton />
@@ -18,13 +20,15 @@
   </div>
   {{yield (hash
                   items=this.currentItems
-                  SearchInput=(component SearchInput value=this.currentSearch onChange=(action (mut this.currentSearch)) light=true small=true style="width: 250px; display: inline-block;" class="bx--toolbar-search-container-persistent")
-                  Pagination=(component Pagination length=@items.length onPageChanged=(action (mut this.currentItemsSlice)))
-                  Row=(component ListRow isExpandable=@isExpandable isCheckable=@isCheckable)
+                  SearchInput=(component SearchInput value=this.currentSearch onChange=(fn (mut this.currentSearch)))
+                  Pagination=(component Pagination length=@items.length onPageChanged=(fn (mut this.currentItemsSlice)))
+                  Row=(component ListRow isExpandable=this.isExpandable isCheckable=this.isCheckable table=this)
+                  Menu=Menu
+                  Table=Table
                   Column=ListColumn
                   Body=ListBody
-                  Header=ListHeader
-                  Toolbar=(component Toolbar table=this selectedItems=this.selectedItems toggleSelectAllItems=this.toggleSelectAllItems allChecked=this.allChecked)
+                  Header=(component ListHeader table=this)
+                  Toolbar=(component Toolbar table=this)
           )
   }}
 </div>

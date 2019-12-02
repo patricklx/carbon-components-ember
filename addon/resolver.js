@@ -1,4 +1,4 @@
-// eslint-disable no-undef global-require
+// eslint-disable no-undef global-this._moduleRegistry.get
 import Resolver from 'ember-resolver';
 import { capitalize } from '@ember/string';
 
@@ -14,7 +14,9 @@ export default Resolver.extend({
       try {
         const parsedName = this.myParseName(name);
         result = this[methodName](parsedName, [root, al]);
-      } catch (e) { }
+      } catch (e) {
+        // do nothing
+      }
     }
     if (result) return result;
     try {
@@ -29,13 +31,13 @@ export default Resolver.extend({
     if (parsedName.fullNameWithoutType.includes('@')) {
       let [pkg, name] = parsedName.fullNameWithoutType.split('@');
       const muPath = `${pkg}/src/services/${name}/service`;
-      if (requirejs.has(muPath)) {
-        return require(muPath).default;
+      if (this._moduleRegistry.has(muPath)) {
+        return this._moduleRegistry.get(muPath).default;
       }
       [pkg, name] = parsedName.fullNameWithoutType.split('@');
       const classicPath = `${pkg}/services/${name}`;
-      if (requirejs.has(classicPath)) {
-        return require(classicPath).default;
+      if (this._moduleRegistry.has(classicPath)) {
+        return this._moduleRegistry.get(classicPath).default;
       }
     }
     return undefined;
@@ -44,8 +46,8 @@ export default Resolver.extend({
   resolveTemplate(parsedName) {
     let path = parsedName.fullNameWithoutType.replace('components/', '');
     path = `${path}/template`;
-    if (requirejs.has(path)) {
-      return require(path).default;
+    if (this._moduleRegistry.has(path)) {
+      return this._moduleRegistry.get(path).default;
     }
     return undefined;
   },
@@ -53,19 +55,19 @@ export default Resolver.extend({
   resolveComponent(parsedName) {
     let path = parsedName.fullNameWithoutType;
     let path2 = path;
-    if (requirejs.has(path2) && require(path2).default.isComponentFactory) {
-      if (!require(path2).helper) {
-        return require(path2).default;
+    if (this._moduleRegistry.has(path2) && this._moduleRegistry.get(path2).default.isComponentFactory) {
+      if (!this._moduleRegistry.get(path2).helper) {
+        return this._moduleRegistry.get(path2).default;
       }
     }
     path2 = `${path}/component`;
-    if (requirejs.has(path2) && require(path2).default.isComponentFactory) {
-      return require(path2).default;
+    if (this._moduleRegistry.has(path2) && this._moduleRegistry.get(path2).default.isComponentFactory) {
+      return this._moduleRegistry.get(path2).default;
     }
 
     path2 = `demoapp${path}`;
-    if (requirejs.has(path2) && require(path2).default.isComponentFactory) {
-      return require(path2).default;
+    if (this._moduleRegistry.has(path2) && this._moduleRegistry.get(path2).default.isComponentFactory) {
+      return this._moduleRegistry.get(path2).default;
     }
     return undefined;
   },
@@ -77,25 +79,25 @@ export default Resolver.extend({
       let [pkg, name] = parsedName.fullNameWithoutType.split('/');
       path = `${pkg}/src/ui/components/${name}`;
 
-      if (requirejs.has(path)) {
-        if (require(path).helper) return require(path).helper;
-        return require(path).default;
+      if (this._moduleRegistry.has(path)) {
+        if (this._moduleRegistry.get(path).helper) return this._moduleRegistry.get(path).helper;
+        return this._moduleRegistry.get(path).default;
       }
       path = `${pkg}/helpers/${name}`;
-      if (requirejs.has(path)) {
-        if (require(path).helper) return require(path).helper;
-        return require(path).default;
+      if (this._moduleRegistry.has(path)) {
+        if (this._moduleRegistry.get(path).helper) return this._moduleRegistry.get(path).helper;
+        return this._moduleRegistry.get(path).default;
       }
     }
     path = `${parsedName.fullNameWithoutType}/component`;
-    if (requirejs.has(path)) {
-      if (require(path).helper) return require(path).helper;
-      return require(path).default;
+    if (this._moduleRegistry.has(path)) {
+      if (this._moduleRegistry.get(path).helper) return this._moduleRegistry.get(path).helper;
+      return this._moduleRegistry.get(path).default;
     }
     path = parsedName.fullNameWithoutType;
-    if (requirejs.has(path)) {
-      if (require(path).helper) return require(path).helper;
-      return require(path).default;
+    if (this._moduleRegistry.has(path)) {
+      if (this._moduleRegistry.get(path).helper) return this._moduleRegistry.get(path).helper;
+      return this._moduleRegistry.get(path).default;
     }
     return undefined;
   },

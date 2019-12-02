@@ -33,6 +33,16 @@ export default class ListComponent extends Component {
   }
 
   @action
+  toggleItemSelection(item, selected) {
+    if (selected && !this.selectedItems.includes(item)) {
+      this.selectedItems.pushObject(item);
+    }
+    if (!selected) {
+      this.selectedItems.removeObject(item);
+    }
+  }
+
+  @action
   toggleSelectAllItems(select) {
     if (select) {
       this.selectedItems = this.currentItems.slice();

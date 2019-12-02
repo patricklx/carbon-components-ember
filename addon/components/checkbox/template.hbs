@@ -1,8 +1,8 @@
 <div class="bx--checkbox-wrapper" ...attributes>
 <label
   tabindex='0'
-  {{on 'focus' (action (mut this.isFocus) true)}}
-  {{on 'blur' (action (mut this.isFocus) false)}}
+  {{on 'focus' (fn (mut this.isFocus) true)}}
+  {{on 'blur' (fn (mut this.isFocus) false)}}
   for="checkbox-{{this.guid}}"
   class="bx--checkbox-label {{if this.isFocus 'bx--checkbox-label__focus'}}"
   data-contained-checkbox-disabled="{{if @disabled 'true' 'false'}}"

@@ -2,7 +2,18 @@ import { SimpleBarChart } from '@carbon/charts';
 import Component from '@ember/component';
 import { action } from '@ember/object';
 import { throttle } from '@ember/runloop';
+import {argsCompat} from "../../../decorators/bx-class-names";
+/** @documenter yuidoc */
 
+/**
+ The CarbonBarChart
+
+ @class CarbonBarChart
+ @public
+ @yield {Object} api
+ @yield {Component} api.DataSet <a href='-components/dataset' >Dataset</a>
+ @yield {Component} api.Axis <a href='-components/axis' >ChartAxis</a>
+ **/
 class CarbonBarChart extends Component {
   tagName = '';
   data = {
@@ -16,6 +27,16 @@ class CarbonBarChart extends Component {
   };
   legendClickable = true;
   containerResizable = true;
+
+  @argsCompat
+  args = {
+    /**
+     * Chart labels
+     @argument labels
+     @type String[]
+     */
+    labels: []
+  };
 
 
   setData() {

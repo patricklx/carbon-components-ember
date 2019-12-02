@@ -1,30 +1,82 @@
 {{import Input from 'carbon-components-ember/components/form-input'}}
+{{import Button from 'carbon-components-ember/components/button'}}
 {{import Demo from 'ember-cli-addon-docs/components/docs-demo'}}
 {{import set from 'carbon-components-ember/helpers/set'}}
 
-<h1>Carbon Code Snippet</h1>
+<h1>Carbon Data Table</h1>
 
 <Demo as |demo|>
   {{#demo.example name='data-table.hbs'}}
     {{import DataTable from 'carbon-components-ember/components/data-table'}}
 
-    <DataTable @items={{array (hash name='a' b='c')}}
+    <DataTable
+        @title="Table title"
+        @items={{array (hash name='a' b='c') (hash name='John' b='asd')}}
 	  as |table|>
-	  <table.Toolbar>
-		<Table.SearchInput />
-	  </table.Toolbar>
-      <table.Header @headers={{array (hash label='Name') (hash label='details')}}></table.Header>	 
-	  <table.Body>
-	    {{#each table.items as |item|}}
-			<table.Row>
-				<table.Column>{{item.name}}</table.Column>
-				<table.Column>{{item.b}}</table.Column>
-			</table.Row>
-		{{/each}}
-	  </table.Body>
-	  
+      <table.Toolbar as |toolbar|>
+        <toolbar.Content>
+          <table.SearchInput />
+        </toolbar.Content>  
+      </table.Toolbar>
+      <table.Table>
+        <table.Header @headers={{array (hash label='Name') (hash label='details') ''}}>
+
+        </table.Header>
+        <table.Body>
+          {{#each table.items as |item|}}
+            <table.Row>
+              <table.Column>{{item.name}}</table.Column>
+              <table.Column>{{item.b}}</table.Column>
+              <table.Menu as |Item|>
+                <Item>Edit</Item>
+              </table.Menu>
+            </table.Row>
+          {{/each}}
+        </table.Body>
+      </table.Table>
+      <table.Pagination />
     </DataTable>
 
   {{/demo.example}}
   <demo.snippet @name="data-table.hbs" />
+</Demo>
+
+<Demo as |demo|>
+  {{#demo.example name='data-table-2.hbs'}}
+    {{import DataTable from 'carbon-components-ember/components/data-table'}}
+
+    <DataTable        
+        @title="Table title"
+        @items={{array (hash name='a' b='c') (hash name='John' b='asd')}}
+	  as |table|>
+      <table.Toolbar as |toolbar|>
+        <toolbar.Content>
+          <table.SearchInput />
+        </toolbar.Content>        
+        <toolbar.Actions>
+          <Button @primary=true>Save</Button>
+        </toolbar.Actions>
+      </table.Toolbar>
+      <table.Table>
+        <table.Header 
+          @isCheckable=true
+          @headers={{array (hash label='Name') (hash label='details') ''}}>
+        </table.Header>
+        <table.Body>
+          {{#each table.items as |item|}}
+            <table.Row @item={{item}}>
+              <table.Column>{{item.name}}</table.Column>
+              <table.Column>{{item.b}}</table.Column>
+              <table.Menu as |Item|>
+                <Item>Edit</Item>
+              </table.Menu>
+            </table.Row>
+          {{/each}}
+        </table.Body>
+      </table.Table>
+      <table.Pagination />
+    </DataTable>
+
+  {{/demo.example}}
+  <demo.snippet @name="data-table-2.hbs" />
 </Demo>

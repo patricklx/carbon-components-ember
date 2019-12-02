@@ -11,7 +11,7 @@
       Items per page:
     </label>
     <div class="bx--select bx--select--inline bx--select__item-count">
-        <Select @options={{defaultTo (array 10 20 30 40 50) @itemsPerPageOptions}} @onSelect={{this.setItemsPerPage}} @content={{this.itemsPerPage}}/>
+        <Select @searchEnabled={{false}} @options={{defaultTo (array 10 20 30 40 50) @itemsPerPageOptions}} @onSelect={{this.setItemsPerPage}} @content={{this.itemsPerPage}}/>
     </div>
     <span class="bx--pagination__text">
       <span data-displayed-item-range>{{this.currentSlice.start}} - {{this.currentSlice.end}}</span> of
@@ -21,7 +21,7 @@
     </span>
   </div>
   <div class="bx--pagination__right">
-    <Select @options={{range 1 this.pages}} @onSelect={{this.setCurrentPage}} @content={{this.currentPage}}/>
+    <Select @searchEnabled={{false}} @options={{range 1 this.pages}} @onSelect={{this.setCurrentPage}} @content={{this.currentPage}}/>
     <label id="select-id-pagination-page-label" class="bx--pagination__text" for="select-id-pagination-page">
       {{this.currentPage}} of {{this.pages}} pages
     </label>

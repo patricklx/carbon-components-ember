@@ -32,3 +32,21 @@ export function bxClassNames(...names) {
   };
 }
 
+export function argsCompat(target, name, descriptor) {
+
+  const init = descriptor.initializer;
+  descriptor.initializer = function() {
+    const args = init(this);
+    const context = this;
+    Object.keys(args).forEach((k) => {
+      Object.defineProperty(args, k, {
+        get() {
+          return context[k];
+        }
+      })
+    });
+    return args;
+  };
+
+  return descriptor;
+}

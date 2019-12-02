@@ -5,7 +5,7 @@
 <h1>Carbon Checkbox</h1>
 
 <Demo as |demo|>
-  {{#demo.example name='card.hbs'}}
+  {{#demo.example name='checkbox.hbs'}}
     {{import Checkbox from 'carbon-components-ember/components/checkbox'}}
 
     <Checkbox @disabled=true @checked=true @onChange={{fn (set this 'checked')}}  @label="disabled" />
@@ -17,5 +17,5 @@
       checked: {{this.checked}}
     </p>
   {{/demo.example}}
-  <demo.snippet @name="card.hbs" />
+  <demo.snippet @name="checkbox.hbs" />
 </Demo>
