@@ -15,6 +15,7 @@
     "storybook": "ember serve & start-storybook -p 9001 -s dist"
   },
   "devDependencies": {
+    "@ember/test-helpers": "^1.7.1",
     "@embroider/compat": "^0.9.0",
     "@embroider/core": "^0.9.0",
     "@embroider/webpack": "^0.9.0",
@@ -44,17 +45,18 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-template-lint": "^1.0.0-beta.3",
     "ember-cli-uglify": "^3.0.0",
+    "ember-component-css": "github:ebryn/ember-component-css#registry-way",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^2.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-maybe-import-regenerator-for-testing": "^1.0.0",
+    "ember-qunit": "^4.6.0",
     "ember-ref-modifier": "^0.1.3",
     "ember-resolver": "^5.1.3",
     "ember-source": "^3.14.2",
     "ember-template-component-import": "^1.1.3",
     "ember-template-helper-import": "^0.2.2",
     "ember-try": "^1.2.1",
-    "ember-component-css": "github:ebryn/ember-component-css#registry-way",
     "loader.js": "^4.7.0"
   },
   "dependencies": {

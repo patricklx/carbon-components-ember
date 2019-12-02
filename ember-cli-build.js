@@ -7,7 +7,7 @@ module.exports = function (defaults) {
   let app = new EmberAddon(defaults, {
     sassOptions: {
       implementation: nodeSass
-    },
+    }
   });
 
   /*
